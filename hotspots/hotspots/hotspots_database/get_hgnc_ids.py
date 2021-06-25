@@ -37,6 +37,19 @@ connection = pymysql.connect(host='localhost',
                              database='hotspots',
                              cursorclass=pymysql.cursors.DictCursor)
 
+def fetch_hgnc_ids(gene_list):
+
+    for gene_name in gene_names_list:
+    answer = request_hgnc_id(BASE_URL_FOR_HGNC, JSON_HEADER, gene_name)
+    closest_HGNC_ID = answer['response']['docs'][0]['hgnc_id'].split(':')[1]
+    gene_names_and_hgnc_id[gene_name] = closest_HGNC_ID
+    
+    list_of_tuples = []
+    for i in gene_names_and_hgnc_id.keys():
+        value = gene_names_and_hgnc_id[i]
+        one_tuple = (value, i)
+        list_of_tuples.append(one_tuple)    
+
 with connection:
     with connection.cursor() as cursor:
 

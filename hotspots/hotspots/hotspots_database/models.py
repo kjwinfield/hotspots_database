@@ -1,8 +1,6 @@
 from django.db import models
 from django.utils import timezone
 from datetime import datetime
-from convert_excel import input1
-
 # Create your models here.
 
 # class HugoSymbol(models.Model):
@@ -13,13 +11,28 @@ from convert_excel import input1
 
 # class PanelType(models.Model):
 
-class HugoSymbol(models.Model):
-    hugo_symbol = []
+class Codon(models.Model):
+    codon_position_id = models.AutoField(primary_key=True)
+    gene_name = models.CharField(max_length=30)
+    amino_acid_position = models.CharField(max_length=30)
+    trinucleotides = models.CharField(max_length=30)
 
-    for hugo_symbol in input1.hugo_symbol:
-        hugo_symbol.append((panel_type, panel_type))
+class AminoAcidChange(models.Model):
+    codon_position_id = models.AutoField(primary_key=True)
+    gene_name = models.CharField(max_length=30)
+    amino_acid_position = models.CharField(max_length=30)
+    trinucleotides = models.CharField(max_length=30)
 
-    type = models.CharField(max_length=50, choices=hugo_symbol)
+class Hotspots(models.Model):
+    codon_position_id = models.AutoField(primary_key=True)
+    gene_name = models.CharField(max_length=30)
+    amino_acid_position = models.CharField(max_length=30)
+    genomic_position = models.CharField(max_length=30)
 
-    class Meta:
-        db_table = "hugo_symbol"
+class Gene(models.Model):
+    hgnc_id = models.CharField(max_length=30)
+    gene_name = models.CharField(max_length=30)
+    q_value = models.CharField(max_length=30)
+
+class Sample(models.Model):
+    codon_position_id = models.ForeignKey(Codon, on_delete=models.CASCADE)
