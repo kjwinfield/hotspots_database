@@ -1,4 +1,3 @@
-
 import pandas as pd
 import datetime
 from dateutil.relativedelta import relativedelta
@@ -20,8 +19,8 @@ class Command(BaseCommand):
 		# print(data_path)
 		data = clean_data.Data(data_path)
 		data.read_data_into_df(data_path)
-		# data.fix_affected_relatives()
-		# data.fix_proband()
+		data.split_by_pipe()
+		#data.remove_mutation_count_from_position()
 		# data.fix_evidence_codes()
 		# data.fix_dob()
 		return data

@@ -5,11 +5,9 @@ import datetime
 from django.db import models
 #from django.contrib.auth.models import User
 from hotspots_database.models import (
-											Codon,
-											AminoAcidChange,
-											Hotspots,
-											Gene,
-											Sample,)
+											GeneName,
+											GrCh37,
+											GrCh38)
 from configparser import RawConfigParser
 
 
@@ -34,93 +32,21 @@ def insert_data(cleaned_data):
 	# Loop through each row
 	for index, row in cleaned_data.df.iterrows():
 
-		# Insert Codon information
-		codon, created = Codon.objects.get_or_create(
+		genes, created = GeneName.objects.get_or_create(
 				gene_name = row["Hugo_Symbol"],
-                #trinucleotides = row['Codon_Change'].split('|')
-                #codon_position_id = len(set(row['Amino_Acid_Position']))
-                #amino_acid_position = row['Amino_Acid_Position']
+				hgnc_id = row["Hugo_Symbol"],
+				hotspot_id = '2',
 				)
 
-		# Insert sample type information
-		#sample_type, created = Sample.objects.get_or_create(
-		#		sample_type = "Unknown",)
-
-		# Insert somatic information
-		genomic_position, created = Hotspots.objects.get_or_create(
-				gene_name = row["Hugo_Symbol"],
-				amino_acid_position = row["Amino_Acid_Position"],
-				genomic_position = row['Genomic_Position']
+		grch37, created = GrCh37.objects.get_or_create(
+				genomic_position_start_37 = row["Genomic_Position"],
+    			genomic_position_end_37 = row["Genomic_Position"]
 				)
-		# # Insert sample information    hgnc_id = models.CharField(max_length=30)
 
-		# random_sample_name = random.randint(0,1000000000)
-		# sample, created = Sample.objects.get_or_create(
-		# 		patient_id = patient,
-		# 		sample_name = random_sample_name,
-		# 		sample_type = sample_type,
-		# 		workflow = -1,
-		# 		somatic_information = somatic_information)
+		grch38, created = GrCh38.objects.get_or_create(
+				genomic_position_start_38 = row["Genomic_Position"],
+    			genomic_position_end_38 = row["Genomic_Position"]
+				)
 
-		# # Insert sequencer information
-		# sequencer, created = Sequencer.objects.get_or_create(
-		# 		name = row["Sequencer"],)	
-
-		# # Insert analysis information
-		# analysis, created = Analysis.objects.get_or_create(
-		# 		sample_id = sample,
-		# 		sequencer = sequencer,
-		# 		date_sequenced = datetime.datetime.now(),
-		# 		runfolder = "Unknown",
-		# 		capture = 1)
-
-
-		# # Insert variant information
-		# pos = row["Variant Genome"].replace("(","").replace(")","")
-		# pos = pos.split(".")[1]
-		# if pos[0] == "?":
-		# 	pos = pos.split("_")[1]
-		# position = re.findall(r"([0-9]*)",pos)[0]
-
-		# if ">" in pos:
-		# 	ref = pos.split(">")[0][-1]
-		# 	alt = pos.split(">")[1][0]
-		# else:
-		# 	ref = "?"
-		# 	alt = "?"
-		# variant, created = Variant.objects.get_or_create(
-		# 		chrom = 17,
-		# 		pos = position,
-		# 		ref = ref,
-		# 		alt = alt,
-		# 		raw_g = row["Variant Genome"],
-		# 		raw_c = row["Variant cDNA"],
-		# 		raw_p = row["Variant Protein"])
-
-		# # Insert RefGenome information
-		# refgenome, created = RefGenome.objects.get_or_create(
-		# 		name = "?",)		
-
-		# analysisvariant, created = AnalysisVariant.objects.get_or_create(
-		# 		variant_id = variant,
-		# 		analysis_id = analysis,
-		# 		depth = 0,
-		# 		genome_id = refgenome)
-
-		# interpretation, created = Interpretation.objects.get_or_create(
-		# 		analysis_variant_id = analysisvariant,
-		# 		date_analysed = datetime.datetime.now(),
-		# 		analysed_by = user,
-		# 		pathogenicity = row["Pathogenicity Code"],
-		# 		active = True,)
-
-		# for criteria_code in row["Evidence Codes"].split(","):
-		# 	criteria, created = Criteria.objects.get_or_create(
-		# 			criteria_code = criteria_code,
-		# 			description = "test description",
-		# 			)
-
-		# 	interpretationcriteria, created = InterpretationCriteria.objects.get_or_create(
-		# 			criteria_id = criteria,
-		# 			interpretation_id = interpretation,
-		# 			)
+#				genomic_position_start_38 = sorted(row[no_count])[-1],
+#    			genomic_position_end_38 = sorted(row[no_count])[0]
