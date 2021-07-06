@@ -35,18 +35,20 @@ def insert_data(cleaned_data):
 		genes, created = GeneName.objects.get_or_create(
 				gene_name = row["Hugo_Symbol"],
 				hgnc_id = row["Hugo_Symbol"],
-				hotspot_id = '2',
 				)
+				
 
 		grch37, created = GrCh37.objects.get_or_create(
+				hotspot_id = genes.hotspot_id,
 				genomic_position_start_37 = row["Genomic_Position"],
     			genomic_position_end_37 = row["Genomic_Position"]
 				)
 
 		grch38, created = GrCh38.objects.get_or_create(
+				hotspot_id = genes.hotspot_id,
 				genomic_position_start_38 = row["Genomic_Position"],
     			genomic_position_end_38 = row["Genomic_Position"]
 				)
-
+		print(genes)
 #				genomic_position_start_38 = sorted(row[no_count])[-1],
 #    			genomic_position_end_38 = sorted(row[no_count])[0]

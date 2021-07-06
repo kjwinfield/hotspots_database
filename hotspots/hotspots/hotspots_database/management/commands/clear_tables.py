@@ -1,12 +1,9 @@
 from django.core.management.base import BaseCommand
 from hotspots_database.models import (
-											Codon,
-											
-											Hotspots,
-											Gene,
-											
-                                            AllGenomicPositions,)
-
+									GeneName,
+                    				GrCh37,
+  					                GrCh38
+                    				)
 class Command(BaseCommand):
 	help = 'Wipes the tables'
 
@@ -17,7 +14,8 @@ class Command(BaseCommand):
 			answer = input("Do you want to wipe the db? ").upper()
 		if answer == "Y":
 
-			AllGenomicPositions.objects.all().delete()
-			Hotspots.objects.all().delete()
+			GeneName.objects.all().delete()
+			GrCh37.objects.all().delete()
+			GrCh38.objects.all().delete()
 
 			print("The tables have now been cleared.")
