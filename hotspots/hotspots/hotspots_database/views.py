@@ -10,12 +10,12 @@ from .models import (
                     )
 # Create your views here.
 
-# def home(request):
-#     #return HttpResponse("Welcome to the Database")
-#     number = GeneName.objects.count()
-#     context = {"number": number}
+def home(request):
+    #return HttpResponse("Welcome to the Database")
+    number = GeneName.objects.count()
+    context = {"number": number}
 
-#     return render (request,'hotspots_database/base.html',context)
+    return render (request,'hotspots_database/base.html',context)
 
 class GeneListView(SingleTableView):
     model = GeneName
