@@ -39,13 +39,13 @@ def insert_data(cleaned_data):
 				
 
 		grch37, created = GrCh37.objects.get_or_create(
-				hotspot_id = genes.hotspot_id,
+				hotspot_id = genes,
 				genomic_position_start_37 = row["Genomic_Position"],
     			genomic_position_end_37 = row["Genomic_Position"]
 				)
 
 		grch38, created = GrCh38.objects.get_or_create(
-				hotspot_id = genes.hotspot_id,
+				hotspot_id = genes,
 				genomic_position_start_38 = row["Genomic_Position"],
     			genomic_position_end_38 = row["Genomic_Position"]
 				)
