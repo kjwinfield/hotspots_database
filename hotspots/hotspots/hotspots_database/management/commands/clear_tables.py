@@ -11,7 +11,7 @@ class Command(BaseCommand):
 		""" Wipes the tables of the database completely."""
 		answer = None
 		while answer not in ("Y", "N"):
-			answer = input("Do you want to wipe the db? ").upper()
+			answer = input("Do you want to wipe the database? Enter Y if yes: ").upper()
 		if answer == "Y":
 
 			GeneName.objects.all().delete()

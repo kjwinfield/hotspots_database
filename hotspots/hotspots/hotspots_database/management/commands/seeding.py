@@ -16,13 +16,10 @@ class Command(BaseCommand):
 							nargs = 1)
 	
 	def clean_data(self, data_path):
-		# print(data_path)
 		data = clean_data.Data(data_path)
 		data.read_data_into_df(data_path)
-		data.split_by_pipe()
-		#data.remove_mutation_count_from_position()
-		# data.fix_evidence_codes()
-		# data.fix_dob()
+		data.remove_mutation_count_from_position_and_sort()
+
 		return data
 
 	def handle(self, *args, **kwargs):
