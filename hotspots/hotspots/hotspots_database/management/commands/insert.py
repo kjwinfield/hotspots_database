@@ -13,6 +13,7 @@ from configparser import RawConfigParser
 
 
 
+
 def insert_data(cleaned_data):
 	"""Insert data into the database"""
 	config = RawConfigParser()
@@ -34,7 +35,7 @@ def insert_data(cleaned_data):
 
 		genes, created = GeneName.objects.get_or_create(
 				gene_name = row["Hugo_Symbol"],
-				hgnc_id = row["Hugo_Symbol"],
+				hgnc_id = row["HGNC_IDs"],
 				)
 				
 
@@ -46,7 +47,7 @@ def insert_data(cleaned_data):
 
 		grch38, created = GrCh38.objects.get_or_create(
 				hotspot_id = genes,
-				genomic_position_start_38 = row["Genomic_Position"][0][0],
-    			genomic_position_end_38 = row["Genomic_Position"][0][-1]
+				genomic_position_start_38 = str(row['GRCh38_coordinates'][0]) + ':' + str(row['GRCh38_coordinates'][1]),
+    			genomic_position_end_38 = str(row['GRCh38_coordinates'][0]) + ':' + str(row['GRCh38_coordinates'][2])
 				)
 

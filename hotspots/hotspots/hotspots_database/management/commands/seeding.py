@@ -6,6 +6,7 @@ import django
 from django.core.management.base import BaseCommand
 import hotspots_database.management.commands.insert as inserter
 import hotspots_database.management.commands.clean_up_data as clean_data
+import hotspots_database.management.commands.convert_to_bed as write_data
 
 class Command(BaseCommand):
 	help = "Seed the database"
@@ -19,7 +20,8 @@ class Command(BaseCommand):
 		data = clean_data.Data(data_path)
 		data.read_data_into_df(data_path)
 		data.remove_mutation_count_from_position_and_sort()
-
+		data.replace_with_grch38_coordinates()
+		data.add_hgnc_ids_to_df()
 		return data
 
 	def handle(self, *args, **kwargs):
@@ -30,3 +32,5 @@ class Command(BaseCommand):
 				cleaned_data_df = self.clean_data(data_path[0])
 				# Insert the data
 				inserter.insert_data(cleaned_data_df)
+				#write to a bed file
+				write_data.write_data_to_file(cleaned_data_df)
