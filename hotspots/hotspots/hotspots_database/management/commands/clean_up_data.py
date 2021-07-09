@@ -55,7 +55,6 @@ class Data:
 		for gene_name in gene_name_list:
 			hgnc_id = request_hgnc_id(gene_name)
 			hgnc_ids.append(hgnc_id)
-		print(gene_name_list)
 		hgnc_series = pd.Series(hgnc_ids)
 		self.df['HGNC_IDs'] = hgnc_series
 
