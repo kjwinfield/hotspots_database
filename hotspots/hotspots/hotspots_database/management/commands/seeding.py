@@ -30,7 +30,7 @@ class Command(BaseCommand):
 				data_path = kwargs['data_path']
 				# Clean the data
 				cleaned_data_df = self.clean_data(data_path[0])
-				#write to a bed file
+				#write to a bed file to it can be converted to build 38
 				write_data.write_data_to_file(cleaned_data_df)
 				# Insert the data
 				inserter.insert_data(cleaned_data_df)

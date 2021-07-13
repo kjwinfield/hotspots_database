@@ -7,12 +7,11 @@ from django.db import models
 from hotspots_database.models import (
 											GeneName,
 											GrCh37,
-											GrCh38)
+											GrCh38,
+											Hotspots,
+											Chromosome
+											)
 from configparser import RawConfigParser
-
-
-
-
 
 def insert_data(cleaned_data):
 	"""Insert data into the database"""
@@ -37,17 +36,25 @@ def insert_data(cleaned_data):
 				gene_name = row["Hugo_Symbol"],
 				hgnc_id = row["HGNC_IDs"],
 				)
-				
+
+		chromosome, created = Chromosome.objects.get_or_create(
+				chromosome = row['GRCh38_coordinates'][0]
+				)
 
 		grch37, created = GrCh37.objects.get_or_create(
-				hotspot_id = genes,
-				genomic_position_start_37 = row["Genomic_Position"][0][0],
-    			genomic_position_end_37 = row["Genomic_Position"][0][-1]
+				genomic_position_start_37 = row["Genomic_Position"][0][0].split(':')[1],
+    			genomic_position_end_37 = row["Genomic_Position"][0][-1].split(':')[1]
 				)
 
 		grch38, created = GrCh38.objects.get_or_create(
-				hotspot_id = genes,
-				genomic_position_start_38 = str(row['GRCh38_coordinates'][0]) + ':' + str(row['GRCh38_coordinates'][1]),
-    			genomic_position_end_38 = str(row['GRCh38_coordinates'][0]) + ':' + str(row['GRCh38_coordinates'][2])
+				genomic_position_start_38 = row['GRCh38_coordinates'][1],
+    			genomic_position_end_38 = row['GRCh38_coordinates'][2]
 				)
-
+		
+		hotspots, created = Hotspots.objects.get_or_create(
+				gene_id = genes,
+				grch37_id = grch37,
+				grch38_id = grch38,
+				chromosome_id = chromosome
+				)
+				

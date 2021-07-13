@@ -127,17 +127,17 @@ p {
 
 header.special {
   text-align: center;
-  margin-bottom: 4rem; }
+  margin-bottom: 0; }
   header.special p {
     max-width: 75%;
-    margin-left: auto;
-    margin-right: auto; }
+    margin-left: 0;
+    margin-right: 0; }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
   line-height: 1.5;
   text-transform: uppercase;
-  margin: 0 0 1.5rem 0; }
+  margin: 0 0 0 0; }
   h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     color: inherit;
     text-decoration: none; }
@@ -1698,7 +1698,7 @@ ul.icons {
 
 /* Header */
 body {
-  padding-top: 3.25rem;
+  padding-top: 0;
  }
   body:before {
     content: ' ';
@@ -1768,6 +1768,11 @@ body {
     margin-left:auto; margin-right:0
   }
 
+  .navbar{
+    margin-left:-20px;
+    margin-right:-20px;
+    }
+    
   #header > .user > a:hover {
     color: white
   }
@@ -1775,7 +1780,7 @@ body {
     #header > nav > a {
     color: inherit;
     display: inline-block;
-    padding: 0 0.75rem;
+    padding: 0 0;
     text-decoration: none; }
     #header > nav > a:hover {
       color: #ffffff; }
@@ -1800,7 +1805,7 @@ body {
       padding-right: 1.25rem; }
     @media screen and (max-width: 736px) {
       #header > nav > a {
-        padding: 0 0.5rem; }
+        padding: 0 0; }
         #header > nav > a + a[href="#menu"]:last-child {
           margin-left: 0.25rem;
           padding-left: 1rem; }
@@ -1809,7 +1814,7 @@ body {
 
 @media screen and (max-width: 980px) {
   body {
-    padding-top: 44px; }
+    padding-top: 0; }
 
   #header {
     height: 44px;

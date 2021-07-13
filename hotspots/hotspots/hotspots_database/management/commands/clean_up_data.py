@@ -43,7 +43,6 @@ class Data:
 		coordinates obtained by the convert_between_builds.py script
 		'''
 		series = pd.Series(grch38_coordinates)
-		print(series)
 		self.df['GRCh38_coordinates'] = series
 
 
@@ -51,7 +50,7 @@ class Data:
 		gene_name_list = []
 		for index, row in self.df.iterrows():
 			gene_name_list.append(row['Hugo_Symbol'])
-			print(row['GRCh38_coordinates'])
+			
 		hgnc_ids = []
 		for gene_name in gene_name_list:
 			hgnc_id = request_hgnc_id(gene_name)
