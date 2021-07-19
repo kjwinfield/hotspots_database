@@ -7,12 +7,14 @@
 
 <table>
     <tr>
-        <th>chromosome</th>
-        <th>start</th>
-        <th>end</th>
+        <th>Gene</th>
+        <th>Chromosome</th>
+        <th>Start Position</th>
+        <th>End Position</th>
    </tr>
     {% for thing in data %}
     <tr>
+        <td>{{ thing.3 }}</td>
         <td>{{ thing.0 }}</td>
         <td>{{ thing.1 }}</td>
         <td>{{ thing.2 }}</td>
