@@ -21,7 +21,7 @@ def home(request):
 
 class GeneListView(SingleTableView):
     model = GeneName
-    template_name='hotspots_database/multiple_table_view.html'
+    template_name='hotspots_database/genomic_positions.html'
 
 class GRCh37View(TemplateView):
     template_name = 'hotspots_database/datatables_template.html'
