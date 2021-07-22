@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from .config import HOTSPOT_USER, HOTSPOT_PASSWORD, SECRET_KEY
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -18,9 +19,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*dq#3*8t^!%(=pl!)-alw0#)h$=8an(1j%zbh&$@u^pciz%5-h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hotspots_database',
-    'django_tables2'
+    'django_tables2',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -80,8 +79,8 @@ DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.mysql",
         'NAME': 'hotspots_database',
-        'USER': 'katherine',
-        'PASSWORD': 'datapass',
+        'USER': HOTSPOT_USER,
+        'PASSWORD': HOTSPOT_PASSWORD,
     }
 }
 

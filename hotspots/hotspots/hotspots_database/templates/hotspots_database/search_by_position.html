@@ -1,0 +1,52 @@
+{% extends 'hotspots_database/base.html' %}
+
+{% block content %}
+
+
+<!-- <div class="container" style="background-color: #eee;"> -->
+<div class="container">
+    <div class=" w-auto" >
+        <br><br>
+    {% if hotspots %}
+        <h3>{{ hotspots|length}} Hotspots at position {{chromosome}}:{{position}}</h3>
+    {% else %}
+        <h3>No hotspots found at position {{chromosome}}:{{position}}</h3>
+    {% endif %}
+    <!-- <p>
+    <a class="btn btn-primary" href="../../components/navbar/" role="button">View navbar docs &raquo;</a>
+    </p> -->
+    
+    <div class="table-responsive">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Chromosome</th>
+              <th scope="col">Start Position</th>
+              <th scope="col">End Position</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for hotspot in hotspots %}
+            <tr>
+              <td>{{chromosome}}</td>
+              <td>{{genomic_position_start_37}}</td>
+              <td>{{genomic_position_end_37}}</td>
+              <td>{{genomic_position_start_38}}</td>
+              <td>{{genomic_position_end_38}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+    </div>
+</div>
+
+
+
+{% endblock %}

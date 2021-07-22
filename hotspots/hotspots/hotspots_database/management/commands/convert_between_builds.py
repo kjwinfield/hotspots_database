@@ -31,7 +31,7 @@ def convert_to_grch38(base_url, coordinates, header, species="human", current_bu
         chr_on_38 = response['mappings'][0]['mapped']['seq_region_name']
         start_on_38 = response['mappings'][0]['mapped']['start']
         end_on_38 = response['mappings'][0]['mapped']['end']
-        answer = [int(chr_on_38), start_on_38, end_on_38]
+        answer = [chr_on_38, start_on_38, end_on_38]
         answer_list.append(answer)
 
     return answer_list
@@ -57,3 +57,7 @@ for i in content:
     all_coordinates_list.append(empty_list)
 
 grch38_coordinates = convert_to_grch38(ENSEMBL_BASE_URL, all_coordinates_list, JSON_HEADER)
+test_coordinates = ['16', '56873495', '56873495']
+test_coord_2 = ['8', '145738768', '145738768']
+test_coordinates_list = [test_coordinates, test_coord_2]
+#tested_coordinates = convert_to_grch38(ENSEMBL_BASE_URL, test_coordinates_list, JSON_HEADER)

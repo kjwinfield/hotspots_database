@@ -5,7 +5,6 @@ only has gene names, and not gene IDs
 '''
 import requests     # Needed to talk to the API
 import json         # Needed to format the ouput data
-import pymysql      # Needed to access the SQL database
 from configparser import RawConfigParser
 
 # Define URL information as strings

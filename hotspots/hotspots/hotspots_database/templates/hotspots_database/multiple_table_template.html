@@ -3,9 +3,44 @@
 {% block content %}
 
 {% load render_table from django_tables2 %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css"/>
+ 
+<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/scroller/2.0.3/js/dataTables.scroller.min.js"></script>
+
+<div style="width:90%; margin:0 auto; padding-top: 50px; padding-bottom: 50px;">
+
+    <div>
+        <h2>Search hotspots</h2><br>
+       
+        <form method='GET'>
+            <strong>{{ filter.form }}</strong>
+            <input type='submit' value='Filter' />
+    
+            <br><br>
+            {{ filter.qs.count }} of {{ filter.queryset.count }} items returned.
+            <br>
+    
+            <a href='{{ request.path }}' >Clear filters</a>
+        </form>
+    </div>
+
+</div>
+
+<hr/>​​​​​​​​​​​​​​​​​​​<br/>
+
+    
+    <h3>Matches found</h3>
+    {% if table %}
+        {% render_table table %}
+    {% endif %}
+    
+</div>
+
 <h3>Genomic Positions</h3>
 
-<table>
+<table id = "info" class="display">
     <tr>
         <th>Gene</th>
         <th>Chromosome</th>
@@ -21,5 +56,12 @@
     </tr>
     {% endfor %}
 </table>
+
+
+<script>
+$(document).ready(function() {
+    $('#grch37').DataTable();
+} );
+</script>
 
 {% endblock %}

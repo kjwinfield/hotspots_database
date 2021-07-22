@@ -3,6 +3,13 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="{% static 'css/hotspots_database.css' %}">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+			  crossorigin="anonymous"></script>
+		
+  
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
 <!DOCTYPE html>
 <html>
 
@@ -51,7 +58,7 @@
            
 
         </ul>
-        <i class="fas fa-question-circle fa-2x" data-toggle="tooltip" title="Search for a variant at a genomic position (e.g 17-41247941)" style="color:white"></i>
+        <i class="fas fa-question-circle fa-2x" data-toggle="tooltip" title="Search for a hotspot at a genomic position (format: 17:41247941)" style="color:white"></i>
         <form class="form-inline my-2 my-md-0" action="/results/" method="get">
           <input class="form-control" type="text" placeholder="Search" name="query"><button class="btn btn-light my-2 my-sm-0" type="submit" value="Search">Search</button>
         </form>
