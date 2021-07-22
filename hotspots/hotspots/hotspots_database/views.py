@@ -71,50 +71,7 @@ class GRCh38View(TemplateView):
                     list1.append(each_query.gene_name)
             data.append(list1)
 
-        context["data"] = data
+        context["hotspots"] = data
         filter = HotspotsFilter(self.request.GET)
         context["filter"] = filter
         return context
-
-def search_by_position(request, chromosome, position):
-    """
-    View that checks if there are hotspots at a position
-    """
-    variants = query_hotspots_at_position(chromosome, position)
-    context = {"variants" : variants,
-                "position": position,
-                "chromosome": chromosome,
-                }
-    return render(request,
-                'hotspots_database/search_by_position.html',
-                context)
-
-def query_hotspots_at_position(chromosome, position):
-    """
-    Performs the django query to look for variants at a position.
-    Includes the interpretations and genome build information
-    """
-    variants_at_pos = GrCh37.objects.all().filter(
-                         grch37_id=position)
-    variants_at_pos = variants_at_pos.prefetch_related("interpretation_set").all()
-    return variants_at_pos
-
-def search(request):
-    query = request.GET['query']
-    if ":" in query:
-        chromosome = int(query.split(":")[0])
-        position = query.split(":")[1]
-        return redirect('search_by_position', 
-                        chromosome=chromosome,
-                        position=position)
-    else:
-        return redirect('home')
-
-def filter_grch37(request):
-    filter = GRCh37HotspotFilter(request.GET, queryset=GrCh37.objects.all())
-    return render(request, 'hotspots_database/search_by_position.html', {'filter': filter})
-
-def filter_grch38(request):
-    filter = GRCh38HotspotFilter(request.GET, queryset=GrCh38.objects.all())
-    return render(request, 'hotspots_database/search_by_position.html', {'filter': filter})
-
