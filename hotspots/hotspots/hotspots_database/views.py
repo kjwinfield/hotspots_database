@@ -23,10 +23,6 @@ class GeneListView(SingleTableView):
     model = GeneName
     template_name='hotspots_database/multiple_table_view.html'
 
-class GRCh37ViewAgain(SingleTableView):
-    model = Hotspots_Table_37
-    template_name='hotspots_database/genomic_positions.html'
-
 class GRCh37View(TemplateView):
     template_name = 'hotspots_database/datatables_template.html'
     model = GrCh37
@@ -72,6 +68,4 @@ class GRCh38View(TemplateView):
             data.append(list1)
 
         context["hotspots"] = data
-        filter = HotspotsFilter(self.request.GET)
-        context["filter"] = filter
         return context
