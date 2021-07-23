@@ -10,9 +10,8 @@
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/scroller/2.0.3/css/scroller.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
-
   <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/scroller/2.0.3/js/dataTables.scroller.min.js"></script>
   <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/scroller/2.0.3/js/dataTables.scroller.min.js"></script>
 </head>
@@ -31,7 +30,7 @@
                 <td><input type="text" id="max" name="max"></td>
             </tr>
         </thead></table>
-        <table id="matches" class="display" style="width:100%" data-server-side="true" data-ajax="/api/albums/?format=datatables">
+        <table id="matches" class="display" style="width:100%">
           <thead>
             <tr>
 
@@ -52,16 +51,61 @@
             </tr>
             {% endfor %}
           </tbody>
+
         </table>
+        <table id="example">
+          <thead>
+            <tr>
+              <th>1</th>
+              <th>2</th>
+            </tr>
+          </thead>
+        </table>
+
       </div>
     </div>
   </div>
 
-  <script type="text/javascript" class="init">
+  <script type="text/javascript">
     $(document).ready(function() {
-        $('#matches').DataTable();
+        $('#matches').DataTable( {
+                scrollY:        "75vh",
+                scrollCollapse: true,
+                scroller:       true,
+                scroller: {
+                    loadingIndicator: true
+                },
+              });
     } );
   </script>
+
+<script type="text/javascript">
+$.fn.dataTable.ext.search.push(
+    function( settings, data, dataIndex ) {
+        var min = parseInt( $('#min').val(), 10 );
+        var max = parseInt( $('#max').val(), 10 );
+        var age = parseFloat( data[3] ) || 0; // use data for the age column
+ 
+        if ( ( isNaN( min ) && isNaN( max ) ) ||
+             ( isNaN( min ) && age <= max ) ||
+             ( min <= age   && isNaN( max ) ) ||
+             ( min <= age   && age <= max ) )
+        {
+            return true;
+        }
+        return false;
+    }
+);
+ 
+$(document).ready(function() {
+    var table = $('#example').DataTable();
+     
+    // Event listener to the two range filtering inputs to redraw on input
+    $('#min, #max').keyup( function() {
+        table.draw();
+    } );
+} );
+</script>
 <p><center>Disclaimer: The hotspot chr8:145738768 has been excluded from the data. The region is present in build GRCh37 but does not convert to build GRCh38</center></p>
 </body>
 </html>

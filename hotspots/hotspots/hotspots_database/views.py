@@ -8,8 +8,6 @@ from .models import (
                     Chromosome,
                     Hotspots
                     )
-from .filters import GRCh37HotspotFilter, GRCh38HotspotFilter, HotspotsFilter
-from .tables import Hotspots_Table_37
 # Create your views here.
 
 def home(request):
