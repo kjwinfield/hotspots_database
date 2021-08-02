@@ -20,16 +20,6 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <table cellspacing="5" cellpadding="5">
-            <thead><tr>
-                <td>Start position:</td>
-                <td><input type="text" id="min" name="min"></td>
-            </tr>
-            <tr>
-                <td>End position:</td>
-                <td><input type="text" id="max" name="max"></td>
-            </tr>
-        </thead></table>
         <table id="matches" class="display" style="width:100%">
           <thead>
             <tr>
@@ -52,19 +42,6 @@
             {% endfor %}
           </tbody>
 
-        </table>
-        <table id="example">
-          <thead>
-            <tr>
-              <th>1</th>
-              <th>2</th>
-            </tr>
-          </thead>
-        </table>
-
-      </div>
-    </div>
-  </div>
 
   <script type="text/javascript">
     $(document).ready(function() {
@@ -79,33 +56,7 @@
     } );
   </script>
 
-<script type="text/javascript">
-$.fn.dataTable.ext.search.push(
-    function( settings, data, dataIndex ) {
-        var min = parseInt( $('#min').val(), 10 );
-        var max = parseInt( $('#max').val(), 10 );
-        var age = parseFloat( data[3] ) || 0; // use data for the age column
- 
-        if ( ( isNaN( min ) && isNaN( max ) ) ||
-             ( isNaN( min ) && age <= max ) ||
-             ( min <= age   && isNaN( max ) ) ||
-             ( min <= age   && age <= max ) )
-        {
-            return true;
-        }
-        return false;
-    }
-);
- 
-$(document).ready(function() {
-    var table = $('#example').DataTable();
-     
-    // Event listener to the two range filtering inputs to redraw on input
-    $('#min, #max').keyup( function() {
-        table.draw();
-    } );
-} );
-</script>
+
 <p><center>Disclaimer: The hotspot chr8:145738768 has been excluded from the data. The region is present in build GRCh37 but does not convert to build GRCh38</center></p>
 </body>
 </html>

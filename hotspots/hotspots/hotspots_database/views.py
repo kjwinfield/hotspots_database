@@ -46,7 +46,7 @@ class GRCh37View(TemplateView):
 
 
 class GRCh38View(TemplateView):
-    template_name = 'hotspots_database/multiple_table_template.html'
+    template_name = 'hotspots_database/datatables_template.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
